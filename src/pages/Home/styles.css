@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@layer components {
+  .wrapper {
+    @apply flex flex-1 justify-between w-screen h-[90%] p-20;
+  }
+
+  .column {
+    @apply flex flex-col justify-center w-1/2 h-full gap-4;
+  }
+}
