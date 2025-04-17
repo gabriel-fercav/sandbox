@@ -1,5 +1,51 @@
 @import 'tailwindcss';
 
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility green {
+  @apply text-[#8ddd8d];
+}
+
+@layer base {
+  body {
+    @apply flex h-screen w-screen bg-gradient-to-br from-zinc-950 from-40% via-zinc-900 via-70% to-zinc-800;
+  }
+}
+
+@layer utilities {
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-left {
+    @apply animate-[slide-in-left_0.8s_ease-out_forwards];
+  }
+
+  .slide-in-right {
+    @apply animate-[slide-in-right_0.8s_ease-out_forwards];
+  }
+}
+
 :root {
   display: 'flex';
   flex-direction: 'column';
@@ -10,7 +56,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,12 +72,12 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+/* body {
   display: flex;
   height: 100vh;
   width: 100vw;
   background-color: #131313;
-}
+} */
 
 h1 {
   line-height: 1.1;
