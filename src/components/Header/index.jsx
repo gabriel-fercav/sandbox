@@ -8,7 +8,7 @@ import { FaLinkedin as Linkedin } from 'react-icons/fa'
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center w-full border-b-1 border-stone-800 px-15 py-3">
+    <div className="flex justify-between items-center w-full border-b-1 border-zinc-700 px-20 py-3">
       <div>
         <img className="w-40 h-auto" src={SandboxLogoLarge} alt="Logo" />
       </div>

@@ -14,7 +14,7 @@ const Home = () => {
       <Header />
       <div className="wrapper">
         {/* Left column */}
-        <div className="column border-r-1 border-stone-800 pr-20">
+        <div className="column border-r-1 border-zinc-700 pr-20">
           <div>
             <h2 className="font-bold font-sans green text-[min(5vw,96px)]">Bem-vindo ao</h2>
             <img className="w-150 h-auto" src={SandboxLogoLarge} alt="Logo" />
@@ -24,7 +24,7 @@ const Home = () => {
             inteligência artificial — tudo em um só lugar. No Sandbox, você alterna entre diferentes
             modelos de IA na mesma sessão, com liberdade total para experimentar.
           </p>
-          <button className="w-80 h-15 mt-5 bg-[#8ddd8d] rounded-2xl text-gray-900 text-2xl font-bold hover:bg-[#8ddd8d]/80 transition duration-300 animate-pulse">
+          <button className="w-80 h-15 mt-5 bg-[#8ddd8d] rounded-2xl text-gray-900 text-2xl font-bold hover:bg-[#8ddd8d]/80 transition duration-300">
             Experimente agora
           </button>
         </div>
