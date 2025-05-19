@@ -1,14 +1,19 @@
 import React from 'react'
 
-import SandboxLogoLarge from '_/assets/logo-large-white.png'
-import Header from '_/components/Header'
+import SandboxLogoLarge from '@/assets/logo-large-white.png'
+import Header from '@/components/Header'
 
+import { Button } from '@/components/ui/button'
+
+import { useNavigate } from 'react-router-dom'
 import { DeepSeek } from '@lobehub/icons'
 import { OpenAI } from '@lobehub/icons'
 
 import './styles.css'
 
 const Home = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <Header />
@@ -22,17 +27,18 @@ const Home = () => {
           <p className="text-2xl text-white mb-8">
             Um espaço para aprender, criar histórias e explorar novas formas de interação com
             inteligência artificial — tudo em um só lugar. No Sandbox, você alterna entre diferentes
-            modelos de IA na mesma sessão, com liberdade total para experimentar.
+            modelos de IA na mesma sessão, com liberdade total para experimentar e comparar
+            resultados.
           </p>
-          <button className="w-80 h-15 mt-5 bg-[#8ddd8d] rounded-2xl text-gray-900 text-2xl font-bold hover:bg-[#8ddd8d]/80 transition duration-300">
+          <Button onClick={() => navigate('/chat')} className="w-80" variant="homepage" size="xl">
             Experimente agora
-          </button>
+          </Button>
         </div>
 
         {/* Right column */}
         <div className="column pl-20 slide-in-right">
-          <OpenAI.Combine size={76} type={'color'} />
-          <DeepSeek.Combine size={76} type={'color'} />
+          <OpenAI.Combine size={76} type={'color'} className="text-zinc-300" />
+          <DeepSeek.Combine size={76} type={'color'} className="text-zinc-300" />
         </div>
       </div>
     </>
