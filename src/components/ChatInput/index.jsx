@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 
-const ChatInput = ({ onSend }) => {
-  const [value, setValue] = useState('')
+const ChatInput = ({ onSend, value, setValue }) => {
   const textareaRef = useRef(null)
 
   const handleKeyDown = (e) => {
@@ -44,10 +43,10 @@ const ChatInput = ({ onSend }) => {
           onKeyDown={handleKeyDown}
           placeholder="Digite sua mensagem..."
         />
-        <p className="text-zinc-400 text-sm mt-2">
-          O chat pode cometer erros. Verifique informações importantes.
-        </p>
       </div>
+      <p className="text-zinc-400 text-sm mt-2">
+        O chat pode cometer erros. Verifique informações importantes.
+      </p>
     </div>
   )
 }
