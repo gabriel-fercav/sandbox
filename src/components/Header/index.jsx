@@ -1,8 +1,8 @@
 import React from 'react'
 
-import IconButton from '_/components/IconButton'
+import IconButton from '@/components/IconButton'
 
-import SandboxLogoLarge from '_/assets/logo-large-white.png'
+import SandboxLogoLarge from '@/assets/logo-large-white.png'
 import { FaGithub as Github } from 'react-icons/fa'
 import { FaLinkedin as Linkedin } from 'react-icons/fa'
 

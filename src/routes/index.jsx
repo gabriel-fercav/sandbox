@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from '_/pages/Home'
-import Chat from '_/pages/Chat'
+import Home from '@/pages/Home'
+import Chat from '@/pages/Chat'
 
 const AppRoutes = () => {
   return (
