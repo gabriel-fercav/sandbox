@@ -4,17 +4,15 @@ import Markdown from 'react-markdown'
 const TextBubble = ({ role, message }) => {
   if (role === 'user') {
     return (
-      <div className="w-1/2 flex justify-end">
-        <div className="bg-zinc-800 text-zinc-200 p-4 rounded-2xl h-fit w-fit max-w-1/2">
-          {message}
-        </div>
+      <div className="flex w-full justify-end">
+        <div className="bg-zinc-800 text-zinc-200 p-4 rounded-2xl">{message}</div>
       </div>
     )
   }
 
   return (
-    <div className="w-1/2 flex justify-start">
-      <div className="text-zinc-200 h-fit w-3/4 prose prose-invert">
+    <div className="flex w-full justify-start">
+      <div className="text-zinc-200 h-fit prose prose-invert">
         <Markdown>{`${message}`}</Markdown>
       </div>
     </div>

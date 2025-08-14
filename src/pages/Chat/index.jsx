@@ -83,29 +83,37 @@ const Chat = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-row h-screen overflow-hidden">
+      <div className="flex h-full w-full flex-row overflow-y-hidden">
+        {/* Empty Mocked Side Bar */}
         <div className="w-85 h-full border-r-1 border-zinc-700"></div>
-        <ModelSelect models={modelList} onChange={setModel} />
-        <div className="w-full items-center flex flex-col py-10 gap-10 overflow-y-scroll">
-          {chatHistory.length > 0 ? (
-            chatHistory.map((message, index) => {
-              return (
-                <TextBubble
-                  key={message.content + index}
-                  role={message.role}
-                  message={message.content}
-                />
-              )
-            })
-          ) : (
-            <p className="w-max text-center text-zinc-200 text-3xl">Por onde começamos?</p>
-          )}
-          <ChatInput
-            onSend={() => sendPrompt(payload)}
-            value={content}
-            setValue={setContent}
-            disabled={isPending}
-          />
+        {/* -------- */}
+        <div className="w-full h-full flex flex-col overflow-y-hidden">
+          <div className="items-center justify-center flex flex-col py-10 gap-10 overflow-y-scroll">
+            <div className="w-1/2 h-full flex flex-col gap-15">
+              {chatHistory.length > 0 ? (
+                chatHistory.map((message, index) => {
+                  return (
+                    <TextBubble
+                      key={message.content + index}
+                      role={message.role}
+                      message={message.content}
+                    />
+                  )
+                })
+              ) : (
+                <p className="text-center text-zinc-200 text-3xl">Por onde começamos?</p>
+              )}
+            </div>
+          </div>
+          <div className="bottom-0 w-full flex flex-col items-center gap-5">
+            <ChatInput
+              onSend={() => sendPrompt(payload)}
+              value={content}
+              setValue={setContent}
+              disabled={isPending}
+            />
+            <ModelSelect models={modelList} onChange={setModel} />
+          </div>
         </div>
       </div>
     </>
