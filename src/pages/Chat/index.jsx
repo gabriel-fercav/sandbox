@@ -1,10 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react'
+import { useQuery, useMutation } from '@tanstack/react-query'
+
 import Header from '@/components/Header'
 import ChatInput from '@/components/ChatInput'
 import TextBubble from '@/components/TextBubble'
 import ModelSelect from '@/components/ModelSelect'
+
 import { request } from '@/services/api'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { formatModelName } from '@/utils/format-model-name'
 
 const Chat = () => {
   const [chatHistory, setChatHistory] = useState([])
@@ -30,30 +33,52 @@ const Chat = () => {
     }
   }, [model, chatHistory, content])
 
-  const { data: models, isLoading } = useQuery({
+  const { mutate: sendPrompt, isPending } = useMutation({
+    mutationFn: async (payload) => {
+      if (!isPending) {
+        const response = await request(
+          'https://api.groq.com/openai/v1/chat/completions',
+          'POST',
+          payload
+        )
+        setContent('')
+        return response
+      }
+    },
+    onSuccess: (data) => {
+      const lastMessage = data.choices[0].message
+      const userMessage = { role: 'user', content: content }
+      setChatHistory((prevState) => [...prevState, userMessage, lastMessage])
+    },
+    onError: (err) => console.error(err),
+    retry: false,
+  })
+
+  const { data: models } = useQuery({
     queryFn: async () => request('https://api.groq.com/openai/v1/models', 'GET'),
     refetchOnWindowFocus: false,
     queryKey: ['models'],
   })
 
-  console.log(model)
+  console.log('asd', modelList)
 
   useEffect(() => {
-    setModelList(models?.data.map((model) => ({ id: model.id, owned_by: model.owned_by })))
-  }, [models])
+    const LLMs = models?.data.filter(
+      (model) =>
+        model.max_completion_tokens > 1000 &&
+        !model.id.includes('whisper') &&
+        !model.id.includes('guard') &&
+        !model.id.includes('tts')
+    )
 
-  const { mutate: sendPrompt } = useMutation({
-    mutationFn: async (payload) =>
-      request('https://api.groq.com/openai/v1/chat/completions', 'POST', payload),
-    onSuccess: (data) =>
-      setChatHistory((prevState) => [
-        ...prevState,
-        data.choices[0].message,
-        { role: 'user', content: content },
-      ]),
-    onError: (err) => console.error(err),
-    retry: false,
-  })
+    setModelList(
+      LLMs?.map((model) => ({
+        id: model.id,
+        name: formatModelName(model.id),
+        owned_by: model.owned_by,
+      }))
+    )
+  }, [models])
 
   return (
     <>
@@ -75,7 +100,12 @@ const Chat = () => {
           ) : (
             <p className="w-max text-center text-zinc-200 text-3xl">Por onde começamos?</p>
           )}
-          <ChatInput onSend={() => sendPrompt(payload)} value={content} setValue={setContent} />
+          <ChatInput
+            onSend={() => sendPrompt(payload)}
+            value={content}
+            setValue={setContent}
+            disabled={isPending}
+          />
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 const getHeaders = () => ({
   'Content-Type': 'application/json',
-  Authorization: 'Bearer',
+  Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_SECRET_KEY}`, // TODO: REMOVER E SUBSTITUIR POR UM ENDPOINT FIREBASE
 })
 
 export const request = async (url, method = 'GET', data = null) => {

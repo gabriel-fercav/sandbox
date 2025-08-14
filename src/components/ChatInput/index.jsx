@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 
-const ChatInput = ({ onSend, value, setValue }) => {
+const ChatInput = ({ onSend, value, setValue, disabled }) => {
   const textareaRef = useRef(null)
 
   const handleKeyDown = (e) => {
@@ -8,7 +8,6 @@ const ChatInput = ({ onSend, value, setValue }) => {
       e.preventDefault()
       if (value.trim()) {
         onSend(value)
-        setValue('')
         resizeTextarea()
       }
     }
@@ -36,6 +35,7 @@ const ChatInput = ({ onSend, value, setValue }) => {
       <div className="w-full border border-zinc-700 rounded-2xl p-5 bg-zinc-800">
         <textarea
           ref={textareaRef}
+          disabled={disabled}
           className="w-full bg-transparent resize-none outline-none text-zinc-200 placeholder-zinc-400 overflow-hidden"
           rows={1}
           value={value}

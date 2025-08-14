@@ -22,7 +22,7 @@ const ModelSelect = ({ models, onChange }) => {
           {models?.map((model) => {
             return (
               <SelectItem key={model.id} value={model.id}>
-                {model.id}
+                {model.name}
               </SelectItem>
             )
           })}

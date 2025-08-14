@@ -6,8 +6,7 @@ import Header from '@/components/Header'
 import { Button } from '@/components/ui/button'
 
 import { useNavigate } from 'react-router-dom'
-import { DeepSeek } from '@lobehub/icons'
-import { OpenAI } from '@lobehub/icons'
+import { DeepSeek, OpenAI, Meta, Moonshot, AlibabaCloud } from '@lobehub/icons'
 
 import './styles.css'
 
@@ -37,6 +36,9 @@ const Home = () => {
 
         {/* Right column */}
         <div className="column pl-20 slide-in-right">
+          <AlibabaCloud.Combine size={64} type={'color'} className="text-zinc-300" />
+          <Meta.Combine size={64} type={'color'} className="text-zinc-300" />
+          <Moonshot.Combine size={64} type={'white'} className="text-zinc-300" />
           <OpenAI.Combine size={76} type={'color'} className="text-zinc-300" />
           <DeepSeek.Combine size={76} type={'color'} className="text-zinc-300" />
         </div>
