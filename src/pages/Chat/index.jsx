@@ -36,11 +36,7 @@ const Chat = () => {
   const { mutate: sendPrompt, isPending } = useMutation({
     mutationFn: async (payload) => {
       if (!isPending) {
-        const response = await request(
-          'https://api.groq.com/openai/v1/chat/completions',
-          'POST',
-          payload
-        )
+        const response = await request('/api/sendMessage', 'POST', payload)
         setContent('')
         return response
       }
@@ -55,7 +51,7 @@ const Chat = () => {
   })
 
   const { data: models } = useQuery({
-    queryFn: async () => request('https://api.groq.com/openai/v1/models', 'GET'),
+    queryFn: async () => request('/api/getModels', 'GET'),
     refetchOnWindowFocus: false,
     queryKey: ['models'],
   })
@@ -63,7 +59,7 @@ const Chat = () => {
   console.log('asd', modelList)
 
   useEffect(() => {
-    const LLMs = models?.data.filter(
+    const LLMs = models?.data?.filter(
       (model) =>
         model.max_completion_tokens > 1000 &&
         !model.id.includes('whisper') &&
