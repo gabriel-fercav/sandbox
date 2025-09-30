@@ -31,12 +31,12 @@ const ChatInput = ({ onSend, value, setValue, disabled }) => {
   }, [])
 
   return (
-    <div className="sticky flex flex-col items-center w-1/2 gap-2 bottom-0">
+    <div className="sticky flex flex-col items-center w-full bottom-0 max-w-[768px]">
       <div className="w-full border border-zinc-700 rounded-2xl p-5 bg-zinc-800">
         <textarea
           ref={textareaRef}
           disabled={disabled}
-          className="w-full bg-transparent resize-none outline-none text-zinc-200 placeholder-zinc-400 overflow-hidden"
+          className="w-full bg-transparent resize-none outline-none text-zinc-200 placeholder-zinc-400"
           rows={1}
           value={value}
           onChange={handleChange}

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import {
   Select,
@@ -10,11 +10,11 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const ModelSelect = ({ models, onChange }) => {
+const ModelSelect = ({ models, selectedModel, onChange }) => {
   return (
     <Select onValueChange={(e) => onChange(e)}>
-      <SelectTrigger className="w-[300px]">
-        <SelectValue placeholder="Selecione um modelo" />
+      <SelectTrigger className="w-fit text-amber-50">
+        <SelectValue value={selectedModel} placeholder="Modelo" />
       </SelectTrigger>
       <SelectContent className="bg-zinc-800 text-blue-50 border-0">
         <SelectGroup>
@@ -22,6 +22,7 @@ const ModelSelect = ({ models, onChange }) => {
           {models?.map((model) => {
             return (
               <SelectItem key={model.id} value={model.id}>
+                {model.icon}
                 {model.name}
               </SelectItem>
             )
