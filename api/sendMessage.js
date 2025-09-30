@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import fetch from 'node-fetch'
 
 export default async function handler(req, res) {
@@ -19,6 +20,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
       body: JSON.stringify(payload),
     })
 
