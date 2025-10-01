@@ -5,6 +5,8 @@ import Header from '@/components/Header'
 import ChatInput from '@/components/ChatInput'
 import TextBubble from '@/components/TextBubble'
 import ModelSelect from '@/components/ModelSelect'
+import TextLoader from '@/components/TextLoader'
+import ChatWindow from '@/components/ChatWindow'
 
 import { request } from '@/services/api'
 import { useModels } from '@/hooks/use-models'
@@ -13,7 +15,7 @@ import { cleanThinkTags } from '@/utils/clean-think-tags'
 const Chat = () => {
   const [chatHistory, setChatHistory] = useState([])
   const [content, setContent] = useState('')
-  const [model, setModel] = useState('llama-3.1-8b-instant')
+  const [model, setModel] = useState('qwen/qwen3-32b')
 
   const modelList = useModels()
 
@@ -55,35 +57,25 @@ const Chat = () => {
   return (
     <>
       <Header />
-      <div className="flex h-full w-full flex-row overflow-y-hidden">
-        {/* Empty Mocked Side Bar */}
-        {/* <div className="w-85 h-full border-r-1 border-zinc-700"></div> */}
-        {/* -------- */}
-        <div className="w-full h-full flex flex-col overflow-y-hidden">
-          <div className="w-full h-full flex flex-col items-center gap-15 overflow-y-scroll p-10">
-            {chatHistory.length > 0 ? (
-              chatHistory.map((message, index) => {
-                return (
-                  <TextBubble
-                    key={message.content + index}
-                    role={message.role}
-                    message={message.content}
-                  />
-                )
-              })
-            ) : (
-              <p className="text-center text-zinc-200 text-3xl">Por onde começamos?</p>
-            )}
-          </div>
-          <div className="bottom-0 w-full flex flex-col items-center gap-5 pb-4">
-            <ChatInput
-              onSend={() => sendPrompt(payload)}
-              value={content}
-              setValue={setContent}
-              disabled={isPending}
-            />
-            <ModelSelect models={modelList} selectedModel={model} onChange={setModel} />
-          </div>
+      {/* Empty Mocked Side Bar */}
+      {/* <div className="w-85 h-full border-r-1 border-zinc-700"></div> */}
+      {/* -------- */}
+      <div className="w-full h-full flex flex-col overflow-y-hidden">
+        <ChatWindow chatHistory={chatHistory} />
+        <div className="bottom-0 w-full flex flex-col items-center gap-5 pb-4">
+          <TextLoader text="Pensando para dar uma boa resposta..." loading={isPending} />
+          <ChatInput
+            onSend={() => sendPrompt(payload)}
+            value={content}
+            setValue={setContent}
+            disabled={isPending}
+          />
+          <ModelSelect
+            disabled={isPending}
+            models={modelList}
+            selectedModel={model}
+            onChange={setModel}
+          />
         </div>
       </div>
     </>
