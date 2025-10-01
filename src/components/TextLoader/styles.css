@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@keyframes gradient-text {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.animate-gradient-text {
+  animation: gradient-text 3s linear infinite;
+}
+
+.slow-spin {
+  animation: spin 3s linear infinite;
+}
+
+.text-wrapper {
+  @apply w-full flex items-center max-w-[768px] bg-gradient-to-r from-zinc-400 via-white to-zinc-400 bg-[length:200%_auto] bg-clip-text text-transparent font-medium;
+}
