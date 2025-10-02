@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 
 import Header from '@/components/Header'
 import ChatInput from '@/components/ChatInput'
-import TextBubble from '@/components/TextBubble'
+
 import ModelSelect from '@/components/ModelSelect'
 import TextLoader from '@/components/TextLoader'
 import ChatWindow from '@/components/ChatWindow'
@@ -11,6 +11,7 @@ import ChatWindow from '@/components/ChatWindow'
 import { request } from '@/services/api'
 import { useModels } from '@/hooks/use-models'
 import { cleanThinkTags } from '@/utils/clean-think-tags'
+import NewChatButton from '@/components/NewChatButton'
 
 const Chat = () => {
   const [chatHistory, setChatHistory] = useState([])
@@ -62,20 +63,25 @@ const Chat = () => {
       {/* -------- */}
       <div className="w-full h-full flex flex-col overflow-y-hidden">
         <ChatWindow chatHistory={chatHistory} />
-        <div className="bottom-0 w-full flex flex-col items-center gap-5 pb-4">
-          <TextLoader text="Pensando para dar uma boa resposta..." loading={isPending} />
-          <ChatInput
-            onSend={() => sendPrompt(payload)}
-            value={content}
-            setValue={setContent}
-            disabled={isPending}
-          />
-          <ModelSelect
-            disabled={isPending}
-            models={modelList}
-            selectedModel={model}
-            onChange={setModel}
-          />
+        <div className="bottom-0 w-full flex-center">
+          <div className="w-3xl flex flex-col gap-3 pb-4">
+            <TextLoader text="Pensando para dar uma boa resposta..." loading={isPending} />
+            <div className="flex gap-3 w-3xl">
+              <ModelSelect
+                disabled={isPending}
+                models={modelList}
+                selectedModel={model}
+                onChange={setModel}
+              />
+              <NewChatButton onClick={() => setChatHistory([])} />
+            </div>
+            <ChatInput
+              onSend={() => sendPrompt(payload)}
+              value={content}
+              setValue={setContent}
+              disabled={isPending}
+            />
+          </div>
         </div>
       </div>
     </>

@@ -13,7 +13,6 @@ const Header = () => {
         <img className="w-40 h-auto" src={SandboxLogoLarge} alt="Logo" />
       </div>
       <div className="flex items-center gap-5">
-        <p className="text-1xl">Sobre</p>
         <IconButton
           icon={<Github />}
           onClick={() => window.open('https://github.com/gabriel-fercav')}

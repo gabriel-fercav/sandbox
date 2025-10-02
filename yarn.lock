@@ -2134,7 +2134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.2.3, @radix-ui/react-slot@npm:^1.1.2, @radix-ui/react-slot@npm:^1.2.2":
+"@radix-ui/react-slot@npm:1.2.3, @radix-ui/react-slot@npm:^1.1.2, @radix-ui/react-slot@npm:^1.2.3":
   version: 1.2.3
   resolution: "@radix-ui/react-slot@npm:1.2.3"
   dependencies:
@@ -10834,7 +10834,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.13"
     "@radix-ui/react-select": "npm:^2.2.5"
     "@radix-ui/react-separator": "npm:^1.1.6"
-    "@radix-ui/react-slot": "npm:^1.2.2"
+    "@radix-ui/react-slot": "npm:^1.2.3"
     "@radix-ui/react-tooltip": "npm:^1.2.6"
     "@tailwindcss/typography": "npm:^0.5.16"
     "@tailwindcss/vite": "npm:^4.1.3"
