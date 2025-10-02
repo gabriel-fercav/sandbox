@@ -14,7 +14,7 @@ const ChatWindow = ({ chatHistory }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center gap-10 overflow-y-scroll p-8">
+    <div className="w-full h-full flex flex-col items-center gap-10 overflow-y-scroll p-5">
       {chatHistory.map((message, index) => {
         return (
           <TextBubble key={message.content + index} role={message.role} message={message.content} />
