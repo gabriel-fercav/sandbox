@@ -1,5 +1,5 @@
 # Live Deploy
-Checkout the live website at https://sandbox-nu-ten.vercel.app/
+Checkout the live website at [https://sandbox-ai-project.vercel.app/]
 
 
 # React + Vite
