@@ -1,5 +1,4 @@
-import React, { useState, useMemo } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import React from 'react'
 
 import Header from '@/components/Header'
 import ChatInput from '@/components/ChatInput'
@@ -8,52 +7,24 @@ import ModelSelect from '@/components/ModelSelect'
 import TextLoader from '@/components/TextLoader'
 import ChatWindow from '@/components/ChatWindow'
 
-import { request } from '@/services/api'
 import { useModels } from '@/hooks/use-models'
-import { cleanThinkTags } from '@/utils/clean-think-tags'
+import { useChat } from '@/hooks/use-chat'
 import NewChatButton from '@/components/NewChatButton'
 
 const Chat = () => {
-  const [chatHistory, setChatHistory] = useState([])
-  const [content, setContent] = useState('')
-  const [model, setModel] = useState('qwen/qwen3-32b')
+  const {
+    chatHistory,
+    content,
+    setContent,
+    model,
+    setModel,
+    sendPrompt,
+    isPending,
+    payload,
+    resetChat,
+  } = useChat()
 
   const modelList = useModels()
-
-  const payload = useMemo(() => {
-    return {
-      model: model,
-      messages: [
-        // {
-        //   role: 'system',
-        //   content:
-        //     'Você é um assistente útil. Você fala responde em português, usando gírias e com uma personalidade carioca.',
-        // },
-        ...chatHistory,
-        {
-          role: 'user',
-          content: content,
-        },
-      ],
-    }
-  }, [model, chatHistory, content])
-
-  const { mutate: sendPrompt, isPending } = useMutation({
-    mutationFn: async (payload) => {
-      if (!isPending) {
-        const response = await request('/api/sendMessage', 'POST', payload)
-        setContent('')
-        return response
-      }
-    },
-    onSuccess: (data) => {
-      const lastMessage = cleanThinkTags(data.choices[0].message)
-      const userMessage = { role: 'user', content: content }
-      setChatHistory((prevState) => [...prevState, userMessage, lastMessage])
-    },
-    onError: (err) => console.error(err),
-    retry: false,
-  })
 
   return (
     <>
@@ -73,7 +44,7 @@ const Chat = () => {
                 selectedModel={model}
                 onChange={setModel}
               />
-              <NewChatButton onClick={() => setChatHistory([])} />
+              <NewChatButton onClick={() => resetChat()} />
             </div>
             <ChatInput
               onSend={() => sendPrompt(payload)}
