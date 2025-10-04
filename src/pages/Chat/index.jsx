@@ -6,10 +6,11 @@ import ChatInput from '@/components/ChatInput'
 import ModelSelect from '@/components/ModelSelect'
 import TextLoader from '@/components/TextLoader'
 import ChatWindow from '@/components/ChatWindow'
+import NewChatButton from '@/components/NewChatButton'
+import InstructionsButton from '@/components/InstructionsButton'
 
 import { useModels } from '@/hooks/use-models'
 import { useChat } from '@/hooks/use-chat'
-import NewChatButton from '@/components/NewChatButton'
 
 const Chat = () => {
   const {
@@ -18,6 +19,8 @@ const Chat = () => {
     setContent,
     model,
     setModel,
+    instructions,
+    setInstructions,
     sendPrompt,
     isPending,
     payload,
@@ -45,6 +48,7 @@ const Chat = () => {
                 onChange={setModel}
               />
               <NewChatButton onClick={() => resetChat()} />
+              <InstructionsButton setValue={setInstructions} value={instructions} />
             </div>
             <ChatInput
               onSend={() => sendPrompt(payload)}

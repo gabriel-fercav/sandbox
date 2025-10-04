@@ -4,15 +4,17 @@ import { request } from '@/services/api'
 import { cleanThinkTags } from '@/utils/clean-think-tags'
 
 export const useChat = (defaultModel = 'qwen/qwen3-32b') => {
-  const [chatHistory, setChatHistory] = useState([])
-  const [content, setContent] = useState('')
   const [model, setModel] = useState(defaultModel)
+  const [content, setContent] = useState('')
+  const [chatHistory, setChatHistory] = useState([])
+  const [instructions, setInstructions] = useState()
 
   const resetChat = () => setChatHistory([])
 
   const payload = useMemo(() => {
     return {
       model,
+      instructions: instructions,
       input: [
         ...chatHistory,
         {
@@ -21,7 +23,7 @@ export const useChat = (defaultModel = 'qwen/qwen3-32b') => {
         },
       ],
     }
-  }, [model, chatHistory, content])
+  }, [model, instructions, chatHistory, content])
 
   const { mutate: sendPrompt, isPending } = useMutation({
     mutationFn: async (payload) => {
@@ -51,6 +53,8 @@ export const useChat = (defaultModel = 'qwen/qwen3-32b') => {
     setContent,
     model,
     setModel,
+    instructions,
+    setInstructions,
     sendPrompt,
     isPending,
     payload,
