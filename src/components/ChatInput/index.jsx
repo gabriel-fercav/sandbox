@@ -46,7 +46,7 @@ const ChatInput = ({ onSend, value, setValue, disabled }) => {
           style={{ lineHeight: `${LINE_HEIGHT}px` }}
         />
       </div>
-      <p className="text-zinc-400 text-sm mt-2">
+      <p className="text-zinc-400 text-sm mt-2 text-center">
         O chat pode cometer erros. Verifique informações importantes.
       </p>
     </div>
