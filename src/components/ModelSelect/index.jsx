@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import {
   Select,
@@ -10,11 +10,17 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const ModelSelect = ({ disabled, models, selectedModel, onChange }) => {
+import { Spinner } from '../ui/spinner'
+
+const ModelSelect = ({ disabled, models, selectedModel, onChange, isLoading }) => {
   return (
-    <Select value={selectedModel} onValueChange={onChange} disabled={disabled}>
+    <Select
+      value={selectedModel || <Spinner />}
+      onValueChange={onChange}
+      disabled={disabled || isLoading}
+    >
       <SelectTrigger className="w-fit text-amber-50 border-zinc-700 !shadow-none focus-visible:!ring-0">
-        <SelectValue placeholder="Modelo" />
+        {isLoading ? <Spinner /> : <SelectValue placeholder="Modelo" />}
       </SelectTrigger>
       <SelectContent className="bg-zinc-800 text-blue-50 border-0">
         <SelectGroup>

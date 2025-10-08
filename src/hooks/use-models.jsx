@@ -20,7 +20,7 @@ export const useModels = () => {
     if (model.owned_by === 'Meta') return <TbBrandMeta className="inline text-amber-50" />
   }, [])
 
-  const { data: models } = useQuery({
+  const { data: models, isFetching } = useQuery({
     queryFn: async () => request('/api/getModels', 'GET'),
     queryKey: ['models'],
     refetchOnWindowFocus: false,
@@ -45,5 +45,5 @@ export const useModels = () => {
     )
   }, [displayModelIcon, models])
 
-  return modelList
+  return { modelList, isFetching }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Header from '@/components/Header'
 import ChatInput from '@/components/ChatInput'
@@ -8,6 +8,7 @@ import TextLoader from '@/components/TextLoader'
 import ChatWindow from '@/components/ChatWindow'
 import NewChatButton from '@/components/NewChatButton'
 import InstructionsButton from '@/components/InstructionsButton'
+import { Spinner } from '@/components/ui/spinner'
 
 import { useModels } from '@/hooks/use-models'
 import { useChat } from '@/hooks/use-chat'
@@ -27,7 +28,7 @@ const Chat = () => {
     resetChat,
   } = useChat()
 
-  const modelList = useModels()
+  const { modelList, isFetching } = useModels()
 
   return (
     <>
@@ -38,14 +39,15 @@ const Chat = () => {
       <div className="w-full h-full flex flex-col overflow-y-hidden">
         <ChatWindow chatHistory={chatHistory} />
         <div className="bottom-0 w-full flex-center">
-          <div className="w-3xl flex flex-col gap-3 pb-4">
+          <div className="w-full max-w-2xl flex flex-col gap-3 pb-4 max-md:px-3">
             <TextLoader text="Pensando para dar uma boa resposta..." loading={isPending} />
-            <div className="flex gap-3 w-3xl">
+            <div className="flex gap-3 flex-wrap">
               <ModelSelect
                 disabled={isPending}
                 models={modelList}
                 selectedModel={model}
                 onChange={setModel}
+                isLoading={isFetching}
               />
               <NewChatButton onClick={() => resetChat()} />
               <InstructionsButton setValue={setInstructions} value={instructions} />
