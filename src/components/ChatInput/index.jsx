@@ -32,7 +32,7 @@ const ChatInput = ({ onSend, value, setValue, disabled }) => {
   }, [])
 
   return (
-    <div className="sticky flex flex-col items-center w-full bottom-0 max-w-[768px]">
+    <div className="sticky flex flex-col items-center w-full bottom-0 min-md:max-w-[768px] max-md:max-w-[100%]">
       <div className="w-full border border-zinc-700 rounded-2xl p-5 bg-zinc-800">
         <textarea
           ref={textareaRef}

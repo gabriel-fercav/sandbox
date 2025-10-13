@@ -21,12 +21,12 @@ const Home = () => {
       <Header />
       <div className="wrapper">
         {/* Left column */}
-        <div className="column min-md:border-r-1 max-md:border-0 border-zinc-700 min-md:pr-20 max-md:pb-10 max-md:w-full">
+        <div className="column min-md:border-r-1 max-md:border-0 border-zinc-700 min-md:pr-20 max-md:w-full">
           <h2 className="font-bold font-sans green min-md:text-[min(5vw,96px)] max-md:text-4xl">
             Bem-vindo ao
           </h2>
           <img className="w-150 h-auto" src={SandboxLogoLarge} alt="Logo" />
-          <p className="max-md:text-xl min-md:text-2xl text-white mb-8">
+          <p className="max-md:text-xl min-md:text-2xl text-white min-md:mb-8 max-md:mb-4">
             Um espaço para aprender, criar histórias e explorar novas formas de interação com
             inteligência artificial — tudo em um só lugar. No Sandbox, você alterna entre diferentes
             modelos de IA na mesma sessão, com liberdade total para experimentar e comparar
