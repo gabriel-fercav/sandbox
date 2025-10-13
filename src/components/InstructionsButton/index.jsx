@@ -32,9 +32,9 @@ const InstructionsButton = ({ setValue, value }) => {
           Instruções de IA
         </Button>
       </DialogTrigger>
-      <DialogContent className="border-zinc-700">
-        <form onSubmit={handleSubmit} className="contents">
-          <DialogHeader>
+      <DialogContent className="border-zinc-700 max-md:w-[90%]">
+        <form onSubmit={handleSubmit} className="content">
+          <DialogHeader className="mb-3 text-left gap-1">
             <DialogTitle>Customize suas respostas</DialogTitle>
             <DialogDescription>
               As instruções de IA são orientações que você dá ao sistema para definir como ele deve
@@ -46,7 +46,7 @@ const InstructionsButton = ({ setValue, value }) => {
               os melhores efeitos. Por exemplo, "evite usar emojis" ao invés de "não use emojis".
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-5">
+          <div className="grid mb-4">
             <div className="grid gap-4">
               <Label htmlFor="instructions">Instruções</Label>
               <Textarea
@@ -55,11 +55,11 @@ const InstructionsButton = ({ setValue, value }) => {
                 name="instructions"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="Exemplo: Responda com imparcialidade e simpatia. Utilize a mesma linguagem escrita pelo usuário. Evite gírias e abreviações."
+                placeholder="Exemplo: Responda com imparcialidade. Use o mesma idioma do usuário. Evite abreviações."
               />
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter className="max-md:gap-3">
             <DialogClose asChild>
               <Button variant="destructive">Fechar</Button>
             </DialogClose>
